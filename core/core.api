@@ -1,0 +1,69 @@
+syntax = "v1"
+
+service core-api {
+	@handler CoreHandler
+	get /from/:name (Request) returns (Response)
+
+	//用户登录
+	@handler UserLogin
+	post /user/login (LoginRequest) returns (LoginReply)
+
+	//用户详情
+	@handler UserDeatil
+	//因为要传identity参数过去，所以要用post方法请求
+	post /user/detail (UserDeatilRequest) returns (UserDeatilReply)
+
+	//邮件发送
+	@handler SendCodeRegister
+	post /send/code/register (SendCodeRequest) returns (SendCodeReply)
+
+	//用户注册
+	@handler UserRegister
+	post /user/register (UserRegisterRequest) returns (UserRegisterReply)
+}
+
+type Request {
+	Name string `path:"name,options=you|me"`
+}
+
+type Response {
+	Message string `json:"message"`
+}
+
+type LoginRequest {
+	Name     string `json:"name"`
+	Password string `json:"password"`
+}
+
+type LoginReply {
+	Token string `json:"token"`
+}
+
+type UserDeatilRequest {
+	identity string `json:"identity"`
+}
+
+type UserDeatilReply {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+type SendCodeRequest {
+	Email string `json:"email"`
+}
+
+type SendCodeReply {
+	Message string `json:"message"`
+}
+
+type UserRegisterRequest {
+	Name     string `json:"name"`
+	Password string `json:"password"`
+	Email    string `json:"email"`
+	Code     string `json:"code"`
+}
+
+type UserRegisterReply {
+	Message string `json:"message"`
+}
+
