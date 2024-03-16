@@ -1,6 +1,8 @@
 package define
 
-import "github.com/golang-jwt/jwt/v4"
+import (
+	"github.com/golang-jwt/jwt/v4"
+)
 
 // token加密盐值
 const SECRET_KEY = "huhaifeng_key"
@@ -11,6 +13,10 @@ const REDIS_CONN_PWD = ""
 
 // 验证码有效时间（秒）
 const CODE_EXPIRE = 300
+
+var TencentSecretID = "AKID2QrIVaVQEwTnt592z3wgRIOTTMbZQ6aF"
+var TencentSecretKey = "wooiR3meTGwiV9g5Qix6Tn3EbvLi0Kcl"
+var TencentCloudURL = "https://hhf-1317635862.cos.ap-guangzhou.myqcloud.com"
 
 type UserClaim struct {
 	Id       int64
