@@ -9,16 +9,17 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func UserHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func UserFileListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.LoginRequest
+		var req types.UserFileListRequest
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := logic.NewUserLogic(r.Context(), svcCtx)
-		resp, err := l.User(&req)
+		l := logic.NewUserFileListLogic(r.Context(), svcCtx)
+		resp, err := l.UserFileList(&req, r.Header.Get("UserIdentity"))
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

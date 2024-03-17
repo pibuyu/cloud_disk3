@@ -2,6 +2,8 @@
 package types
 
 type FileUploadReply struct {
+	Ext      string `json:"ext"`
+	Name     string `json:"name"`
 	Message  string `json:"message"`
 	Identity string `json:"identity"`
 }
@@ -48,6 +50,27 @@ type UserDeatilRequest struct {
 	Identity string `json:"identity"`
 }
 
+type UserFile struct {
+	Id                 int64  `json:"id"`
+	Identity           string `json:"identity"`
+	Name               string `json:"name"`
+	RepositoryIdentity string `json:"repositoryIdentity"`
+	Ext                string `json:"ext"`
+	Path               string `json:"path"`
+	Size               int    `json:"size"`
+}
+
+type UserFileListReply struct {
+	List  []*UserFile `json:"list",optional`
+	Count int         `json:"count",optional`
+}
+
+type UserFileListRequest struct {
+	Id   int64 `json:"id,optional"` //文件夹id
+	Page int   `json:"page,optional"`
+	Size int   `json:"size,optional"`
+}
+
 type UserRegisterReply struct {
 	Message string `json:"message"`
 }
@@ -57,4 +80,14 @@ type UserRegisterRequest struct {
 	Password string `json:"password"`
 	Email    string `json:"email"`
 	Code     string `json:"code"`
+}
+
+type UserRepositorySaveReply struct {
+}
+
+type UserRepositorySaveRequest struct {
+	ParentId           int64  `json:"parentId"`
+	RepositoryIdentity string `json:"repositoryIdentity"`
+	Ext                string `json:"ext"`
+	Name               string `json:"name"`
 }

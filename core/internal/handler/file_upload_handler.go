@@ -46,6 +46,8 @@ func FileUploadHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			httpx.OkJson(w, &types.FileUploadReply{
 				Message:  "file already exists!",
 				Identity: rp.Identity,
+				Ext:      rp.Ext,
+				Name:     rp.Name,
 			})
 			return
 		}

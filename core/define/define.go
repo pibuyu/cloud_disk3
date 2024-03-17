@@ -18,6 +18,10 @@ var TencentSecretID = "AKID2QrIVaVQEwTnt592z3wgRIOTTMbZQ6aF"
 var TencentSecretKey = "wooiR3meTGwiV9g5Qix6Tn3EbvLi0Kcl"
 var TencentCloudURL = "https://hhf-1317635862.cos.ap-guangzhou.myqcloud.com"
 
+// 分页默认参数
+var PAGE_SIZE = 10
+var PAGE_NUM = 1
+
 type UserClaim struct {
 	Id       int64
 	Identity string

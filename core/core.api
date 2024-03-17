@@ -20,11 +20,54 @@ service core-api {
 	//用户注册
 	@handler UserRegister
 	post /user/register (UserRegisterRequest) returns (UserRegisterReply)
+}
 
+@server (
+	middleware: Auth
+)
+service core-api {
 	//文件上传
 	@handler FileUpload
 	post /file/upload (FileUploadRequest) returns (FileUploadReply)
+
+	//用户文件关联存储
+	@handler UserRepositorySave
+	post /user/repository/save (UserRepositorySaveRequest) returns (UserRepositorySaveReply)
+
+	//用户文件列表
+	@handler UserFileList
+	post /user/file/list (UserFileListRequest) returns (UserFileListReply)
 }
+
+type UserFileListRequest {
+	Id   int64 `json:"id,optional"` //文件夹id
+	Page int   `json:"page,optional"`
+	Size int   `json:"size,optional"`
+}
+
+type UserFileListReply {
+	Count int         `json:"count",optional`
+	List  []*UserFile `json:"list",optional`
+}
+
+type UserFile {
+	Id                 int64  `json:"id"`
+	Identity           string `json:"identity"`
+	Name               string `json:"name"`
+	RepositoryIdentity string `json:"repositoryIdentity"`
+	Ext                string `json:"ext"`
+	Path               string `json:"path"`
+	Size               int    `json:"size"`
+}
+
+type UserRepositorySaveRequest {
+	ParentId           int64  `json:"parentId"`
+	RepositoryIdentity string `json:"repositoryIdentity"`
+	Ext                string `json:"ext"`
+	Name               string `json:"name"`
+}
+
+type UserRepositorySaveReply {}
 
 type FileUploadRequest {
 	Hash string `json:"hash,optional"`
@@ -35,7 +78,9 @@ type FileUploadRequest {
 }
 
 type FileUploadReply {
-	Message string `json:"message"`
+	Ext      string `json:"ext"`
+	Name     string `json:"name"`
+	Message  string `json:"message"`
 	Identity string `json:"identity"`
 }
 
