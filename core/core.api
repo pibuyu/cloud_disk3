@@ -20,6 +20,23 @@ service core-api {
 	//用户注册
 	@handler UserRegister
 	post /user/register (UserRegisterRequest) returns (UserRegisterReply)
+
+	//文件上传
+	@handler FileUpload
+	post /file/upload (FileUploadRequest) returns (FileUploadReply)
+}
+
+type FileUploadRequest {
+	Hash string `json:"hash,optional"`
+	Name string `json:"name,optional"`
+	Ext  string `json:"ext,optional"` //文件后缀名
+	Size int64  `json:"size,optional"`
+	Path string `json:"path,optional"` //文件在cos服务器上的路径
+}
+
+type FileUploadReply {
+	Message string `json:"message"`
+	Identity string `json:"identity"`
 }
 
 type Request {
