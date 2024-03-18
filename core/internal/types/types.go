@@ -79,6 +79,15 @@ type UserFileListRequest struct {
 	Size int   `json:"size,optional"`
 }
 
+type UserFileMoveReply struct {
+	Message string `json:"message"`
+}
+
+type UserFileMoveRequest struct {
+	Identity string `json:"identity"`  //要移动的文件的identity
+	ParentId int64  `json:"parent_id"` //新的父级id
+}
+
 type UserFileNameUpdateReply struct {
 	Message string `json:"message"`
 }

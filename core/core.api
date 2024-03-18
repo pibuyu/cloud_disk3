@@ -49,6 +49,19 @@ service core-api {
 	//用户文件删除
 	@handler UserFileDelete
 	delete /user/file/delete (UserFileDeleteRequest) returns (UserFileDeleteReply)
+
+	//用户文件移动文件夹（修改文件的parent_id）
+	@handler UserFileMove
+	post /user/file/move (UserFileMoveRequest) returns (UserFileMoveReply)
+}
+
+type UserFileMoveRequest {
+	Identity string `json:"identity"` //要移动的文件的identity
+	ParentId int64  `json:"parent_id"` //新的父级id
+}
+
+type UserFileMoveReply {
+	Message string `json:"message"`
 }
 
 type UserFileDeleteRequest {
