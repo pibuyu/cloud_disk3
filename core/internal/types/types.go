@@ -61,14 +61,22 @@ type UserFile struct {
 }
 
 type UserFileListReply struct {
-	List  []*UserFile `json:"list",optional`
 	Count int         `json:"count",optional`
+	List  []*UserFile `json:"list",optional`
 }
 
 type UserFileListRequest struct {
 	Id   int64 `json:"id,optional"` //文件夹id
 	Page int   `json:"page,optional"`
 	Size int   `json:"size,optional"`
+}
+
+type UserFileNameUpdateReply struct {
+}
+
+type UserFileNameUpdateRequest struct {
+	Identity string `json:"identity"`
+	Name     string `json:"name"`
 }
 
 type UserRegisterReply struct {

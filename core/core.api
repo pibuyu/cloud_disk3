@@ -37,7 +37,18 @@ service core-api {
 	//用户文件列表
 	@handler UserFileList
 	post /user/file/list (UserFileListRequest) returns (UserFileListReply)
+
+	//用户文件名称修改
+	@handler UserFileNameUpdate
+	post /user/file/name/update (UserFileNameUpdateRequest) returns (UserFileNameUpdateReply)
 }
+
+type UserFileNameUpdateRequest {
+	Identity string `json:"identity"`
+	Name     string `json:"name"`
+}
+
+type UserFileNameUpdateReply {}
 
 type UserFileListRequest {
 	Id   int64 `json:"id,optional"` //文件夹id
