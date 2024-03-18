@@ -53,6 +53,21 @@ service core-api {
 	//用户文件移动文件夹（修改文件的parent_id）
 	@handler UserFileMove
 	post /user/file/move (UserFileMoveRequest) returns (UserFileMoveReply)
+
+	//用户文件夹创建
+	@handler ShareBasicCreate
+	post /share/basic/create (ShareBasicCreateRequest) returns (ShareBasicCreateReply)
+}
+
+type ShareBasicCreateRequest {
+	//给别人分享资源，带的参数是要分享的文件的identity和过期时间
+	RepositoryIdentity string `json:"repository_identity"`
+	ExpireTime         int    `json:"expire_time"`
+}
+
+type ShareBasicCreateReply {
+	Identity string `json:"identity"` //返回这条分享记录在表中的identity
+	Message  string `json:"message"`
 }
 
 type UserFileMoveRequest {

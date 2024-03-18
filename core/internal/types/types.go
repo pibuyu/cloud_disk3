@@ -41,6 +41,16 @@ type SendCodeRequest struct {
 	Email string `json:"email"`
 }
 
+type ShareBasicCreateReply struct {
+	Identity string `json:"identity"` //返回这条分享记录在表中的identity
+	Message  string `json:"message"`
+}
+
+type ShareBasicCreateRequest struct {
+	RepositoryIdentity string `json:"repository_identity"`
+	ExpireTime         int    `json:"expire_time"`
+}
+
 type UserDeatilReply struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
