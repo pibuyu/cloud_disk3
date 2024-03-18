@@ -22,6 +22,8 @@ var TencentCloudURL = "https://hhf-1317635862.cos.ap-guangzhou.myqcloud.com"
 var PAGE_SIZE = 10
 var PAGE_NUM = 1
 
+var TimeFormat = "2006-01-02 15:04:05"
+
 type UserClaim struct {
 	Id       int64
 	Identity string

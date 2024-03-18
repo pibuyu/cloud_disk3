@@ -60,6 +60,14 @@ type UserFile struct {
 	Size               int    `json:"size"`
 }
 
+type UserFileDeleteReply struct {
+	Message string `json:"message"`
+}
+
+type UserFileDeleteRequest struct {
+	Identity string `json:"identity"`
+}
+
 type UserFileListReply struct {
 	Count int         `json:"count",optional`
 	List  []*UserFile `json:"list",optional`
@@ -72,11 +80,22 @@ type UserFileListRequest struct {
 }
 
 type UserFileNameUpdateReply struct {
+	Message string `json:"message"`
 }
 
 type UserFileNameUpdateRequest struct {
 	Identity string `json:"identity"`
 	Name     string `json:"name"`
+}
+
+type UserFolderCreateReply struct {
+	Identity string `json:"identity"`
+	Message  string `json:"message"`
+}
+
+type UserFolderCreateRequest struct {
+	ParentId int64  `json:"parent_id"` //文件夹所属层级
+	Name     string `json:"name"`      //文件夹名称
 }
 
 type UserRegisterReply struct {

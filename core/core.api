@@ -41,6 +41,32 @@ service core-api {
 	//用户文件名称修改
 	@handler UserFileNameUpdate
 	post /user/file/name/update (UserFileNameUpdateRequest) returns (UserFileNameUpdateReply)
+
+	//用户文件夹创建
+	@handler UserFolderCreate
+	post /user/folder/create (UserFolderCreateRequest) returns (UserFolderCreateReply)
+
+	//用户文件删除
+	@handler UserFileDelete
+	delete /user/file/delete (UserFileDeleteRequest) returns (UserFileDeleteReply)
+}
+
+type UserFileDeleteRequest {
+	Identity string `json:"identity"`
+}
+
+type UserFileDeleteReply {
+	Message string `json:"message"`
+}
+
+type UserFolderCreateRequest {
+	ParentId int64  `json:"parent_id"` //文件夹所属层级
+	Name     string `json:"name"` //文件夹名称
+}
+
+type UserFolderCreateReply {
+	Identity string `json:"identity"`
+	Message  string `json:"message"`
 }
 
 type UserFileNameUpdateRequest {
@@ -48,7 +74,9 @@ type UserFileNameUpdateRequest {
 	Name     string `json:"name"`
 }
 
-type UserFileNameUpdateReply {}
+type UserFileNameUpdateReply {
+	Message string `json:"message"`
+}
 
 type UserFileListRequest {
 	Id   int64 `json:"id,optional"` //文件夹id

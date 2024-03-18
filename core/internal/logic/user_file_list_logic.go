@@ -4,6 +4,7 @@ import (
 	"cloud_disk3/core/define"
 	"cloud_disk3/core/models"
 	"context"
+	"time"
 
 	"cloud_disk3/core/internal/svc"
 	"cloud_disk3/core/internal/types"
@@ -57,7 +58,8 @@ func (l *UserFileListLogic) UserFileList(req *types.UserFileListRequest, userIde
 	err = l.svcCtx.Engine.Table("user_repository").
 		Where("parent_id = ? AND user_identity = ?", req.Id, userIdentity).
 		Select("user_repository.id,user_repository.identity,user_repository.repository_identity,user_repository.ext,user_repository.name,"+
-			"repository_pool.path,repository_pool.size").
+																	"repository_pool.path,repository_pool.size").
+		Where("user_repository.deleted_at= ? OR user_repository.deleted_at IS NULL", time.Time{}.Format(define.TimeFormat)). //原生的sql里没有排除掉软删除记录，手动加上
 		Join("LEFT", "repository_pool", "repository_pool.identity = user_repository.repository_identity").
 		Limit(define.PAGE_SIZE, offset).Find(&uf)
 	if err != nil {
