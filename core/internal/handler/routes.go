@@ -23,6 +23,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: SendCodeRegisterHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodGet,
+				Path:    "/share/basic/detail",
+				Handler: ShareBasicDeatilHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodPost,
 				Path:    "/user/detail",
 				Handler: UserDeatilHandler(serverCtx),

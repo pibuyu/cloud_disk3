@@ -51,6 +51,18 @@ type ShareBasicCreateRequest struct {
 	ExpireTime         int    `json:"expire_time"`
 }
 
+type ShareBasicDeatilReply struct {
+	RepositoryIdentity string `json:"repository_identity"`
+	Name               string `json:"name"`
+	Ext                string `json:"ext"`
+	Size               int64  `json:"size"`
+	Path               string `json:"path"`
+}
+
+type ShareBasicDeatilRequest struct {
+	Identity string `json:"identity"`
+}
+
 type UserDeatilReply struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`

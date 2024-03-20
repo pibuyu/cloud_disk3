@@ -20,6 +20,11 @@ service core-api {
 	//用户注册
 	@handler UserRegister
 	post /user/register (UserRegisterRequest) returns (UserRegisterReply)
+
+	//用户详情
+	@handler ShareBasicDeatil
+	//因为要传identity参数过去，所以要用post方法请求
+	get /share/basic/detail (ShareBasicDeatilRequest) returns (ShareBasicDeatilReply)
 }
 
 @server (
@@ -57,6 +62,18 @@ service core-api {
 	//用户文件夹创建
 	@handler ShareBasicCreate
 	post /share/basic/create (ShareBasicCreateRequest) returns (ShareBasicCreateReply)
+}
+
+type ShareBasicDeatilRequest {
+	Identity string `json:"identity"`
+}
+
+type ShareBasicDeatilReply {
+	RepositoryIdentity string `json:"repository_identity"`
+	Name               string `json:"name"`
+	Ext                string `json:"ext"`
+	Size               int64  `json:"size"`
+	Path               string `json:"path"`
 }
 
 type ShareBasicCreateRequest {

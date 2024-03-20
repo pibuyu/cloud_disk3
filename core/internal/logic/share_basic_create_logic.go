@@ -46,6 +46,7 @@ func (l *ShareBasicCreateLogic) ShareBasicCreate(req *types.ShareBasicCreateRequ
 		RepositoryIdentity: req.RepositoryIdentity,
 		ExpireTime:         req.ExpireTime,
 	}
+	logx.Info(data)
 	_, err = l.svcCtx.Engine.Insert(data)
 	if err != nil {
 		return nil, err
